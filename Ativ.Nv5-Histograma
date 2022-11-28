@@ -1,0 +1,35 @@
+# Manipulando arquivo criado.
+name_cadidatos = []
+pont_cadidatos = []
+arquivo = open("Nomes_Falsos.txt", "r+")
+for linha in arquivo:
+    linha = linha.split('=')
+    name_cadidatos.append(linha[0])
+    pont_cadidatos.append(int(linha[1]))
+name_cadidatos.pop(0)
+pont_cadidatos.pop(0)
+
+string_pont = []
+for _ in pont_cadidatos:
+    palavra = num2words(_, lang='pt')
+    string_pont.append(palavra)
+    
+
+# Histograma.
+n, bins, colunas = plt.hist(pont_cadidatos, density=True,
+                            facecolor='#6495ED', alpha=0.75)
+num_bins = 25
+plt.hist(pont_cadidatos, num_bins, density=True,
+         facecolor='#6959CD', alpha=0.80)
+plt.xlabel('Pontos', c = 'r')
+plt.ylabel('Probabilidade%', c = 'r')
+plt.title('Histograma Completo', c = 'b')
+plt.show()
+
+# Nuvem de Palavras.
+pont_palavras = Counter(string_pont)
+wordcloud = WordCloud(width=800,
+                      height=600).generate_from_frequencies(pont_palavras)
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+wordcloud.to_file("Fake_word_cloud.png")
