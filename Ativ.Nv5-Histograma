@@ -1,3 +1,13 @@
+# Criando arquivo com nomes e pontuações falsas.
+falso = Faker('pt_BR')
+Faker.seed(0)
+with open("Nomes_Falsos.txt", "w") as arquivo:
+    for c in range(85):
+        name_falso = falso.name()
+        pont_falso = falso.pyint(1, 20)
+        arquivo.write(f"Nome: {name_falso} - Pontos = {pont_falso}\n")
+arquivo.close()
+
 # Manipulando arquivo criado.
 name_cadidatos = []
 pont_cadidatos = []
